@@ -22,6 +22,11 @@ class ClassMetadata {
     private $name;
 
     /**
+     * @var string
+     */
+    private $namespace;
+
+    /**
      * @var array
      */
     private $attributes = array();
@@ -71,6 +76,14 @@ class ClassMetadata {
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 
     /**
@@ -124,6 +137,14 @@ class ClassMetadata {
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @param string $namespace
+     */
+    public function setNamespace($namespace)
+    {
+        $this->namespace = $namespace;
     }
 
     /**

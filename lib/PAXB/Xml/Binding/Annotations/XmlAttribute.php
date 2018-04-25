@@ -10,4 +10,9 @@ class XmlAttribute extends XmlAnnotation {
      * @var string
      */
     public $name;
+    
+    /**
+     * @var string
+     */
+    public $namespace;
 }

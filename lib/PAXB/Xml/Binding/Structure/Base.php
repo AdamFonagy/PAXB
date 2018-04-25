@@ -30,18 +30,22 @@ class Base {
 
     /**
      * @param string $name
+     * @return $this
      */
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
      * @param int $source
+     * @return $this
      */
     public function setSource($source)
     {
         $this->source = $source;
+        return $this;
     }
 
 

@@ -66,6 +66,9 @@ class AnnotationLoader {
                         if (!empty($annotation->name)) {
                             $classMetadata->setName($annotation->name);
                         }
+                        if (!empty($annotation->namespace)) {
+                            $classMetadata->setNamespace($annotation->namespace);
+                        }
                         break;
                     default:
                         if ($annotation instanceof XmlAnnotation) {
@@ -229,7 +232,12 @@ class AnnotationLoader {
             }
             $element->setTypeValue($annotation->type);
         }
-
+        if (isset($annotation->minoccurs)) {
+            $element->setMinoccurs($annotation->minoccurs);
+        }
+        if (!empty($annotation->namespace)) {
+            $element->setNamespace($annotation->namespace);
+        }
         return $element;
     }
 
@@ -265,6 +273,9 @@ class AnnotationLoader {
         $attribute = new Attribute($property->getName(), Attribute::FIELD_SOURCE);
         if (!empty($annotation->name)) {
             $attribute->setName($annotation->name);
+        }
+        if (!empty($annotation->namespace)) {
+            $attribute->setNamespace($annotation->namespace);
         }
 
         return $attribute;

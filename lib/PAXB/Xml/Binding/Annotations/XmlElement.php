@@ -16,4 +16,13 @@ class XmlElement extends XmlAnnotation {
      */
     public $type = '';
 
+    /**
+		 * @var int
+		 */
+		public $minoccurs = 1;
+
+    /**
+		 * @var string
+		 */
+		public $namespace = '';
 }

@@ -56,6 +56,9 @@ class DOMDocumentMarshaller {
         $classMetadata = $this->classMetadataFactory->getClassMetadata(get_class($object));
 
         $elementName = is_null($parentLevelName) ? $classMetadata->getName() : $parentLevelName;
+        if (!empty($classMetadata->getNamespace())) {
+          $elementName = "{$classMetadata->getNamespace()}:{$elementName}";
+        }
 
         $element  = $document->createElement($elementName);
 
@@ -123,7 +126,11 @@ class DOMDocumentMarshaller {
                 );
             }
 
-            $element->setAttribute($attributeMetadata->getName(), $attributeValue);
+            $attributeName = $attributeMetadata->getName();
+            if(!empty($attributeMetadata->getNamespace())) {
+              $attributeName = "{$attributeMetadata->getNamespace()}:{$attributeName}";
+            }
+            $element->setAttribute($attributeName, $attributeValue);
         }
     }
 
@@ -211,7 +218,9 @@ class DOMDocumentMarshaller {
                 $this->createSubElement($document, $singleElementValue, $elementMetadata, $baseElement);
             }
         } else {
-            $this->createSubElement($document, $elementValue, $elementMetadata, $baseElement);
+            if($elementMetadata->getMinoccurs() > 0 || ($elementMetadata->getMinoccurs() == 0 && $elementValue)) {
+                $this->createSubElement($document, $elementValue, $elementMetadata, $baseElement);
+            }
         }
     }
 
